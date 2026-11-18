@@ -1,0 +1,32 @@
+/* Theme tokens + shared styles. Tailwind reads these through tailwind.config in each page. */
+:root{--bg:#f6f6f7;--card:#fff;--line:#ebebed;--ink:#1c1b1f;--mute:#76757c;--hover:#f1f1f3;--or:#f26a0e;--soft:#fff1e4;
+--c1:#f26a0e;--c2:#fb923c;--c3:#fdba74;--c4:#fde7d3;--gry:#d6d6d9;--grn:#17803d;--grnbg:#e4f6ea;--red:#c9302c;--redbg:#fde9e8;--amb:#b45309;--ambbg:#fff1dc;--sw:248px}
+:root.dark{--bg:#121214;--card:#1b1b1e;--line:#2b2b30;--ink:#f1f0f2;--mute:#9b9aa2;--hover:#26262b;--or:#ff7a1f;--soft:#2b1b0f;
+--c1:#ff7a1f;--c2:#d9701f;--c3:#9c5a28;--c4:#5a3a22;--gry:#45454b;--grn:#5fd38a;--grnbg:#14301f;--red:#ff8b85;--redbg:#3a1a19;--amb:#fbbf6a;--ambbg:#35250f;color-scheme:dark}
+:root.collapsed{--sw:72px}
+body{overflow-x:hidden}
+:focus-visible{outline:2px solid var(--or);outline-offset:2px}
+
+/* Sidebar collapsed state (desktop only) */
+.ic-open{display:none}
+@media (min-width:1024px){
+  .collapsed .lbl,.collapsed .brandlink{display:none}
+  .collapsed .nav{justify-content:center;padding-inline:0}
+  .collapsed #collapse{margin-left:0}
+  .collapsed .ic-close{display:none}
+  .collapsed .ic-open{display:block}
+  .collapsed .me{justify-content:center;padding:6px}
+}
+
+/* Layout grids react to the width of the content area, so they adapt when the sidebar expands or collapses */
+.cq{container-type:inline-size}
+.kp{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))}
+.rw{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+@container (min-width:560px) and (max-width:859px){.r3{grid-template-columns:repeat(2,minmax(0,1fr))}.r3>:last-child{grid-column:span 2}}
+@container (min-width:860px){.r21{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}.r3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Chips + chart parts */
+.chip{display:inline-flex;align-items:center;gap:2px;border-radius:6px;padding:0 6px;font-size:11px;font-weight:600;line-height:18px;background:var(--grnbg);color:var(--grn);white-space:nowrap}
+.chip.dn{background:var(--redbg);color:var(--red)}.chip.am{background:var(--ambbg);color:var(--amb)}
+.gl{stroke:var(--line);stroke-width:1}.ax{fill:var(--mute);font-size:11px}
+.b1{fill:var(--c1)}.b2{fill:var(--gry)}

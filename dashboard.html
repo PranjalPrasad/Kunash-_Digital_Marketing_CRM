@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard – Kunash Digital Marketing CRM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/js/tailwind-config.js"></script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .card { @apply min-w-0 overflow-hidden rounded-xl border border-line bg-card; }
+      .ch { @apply flex min-w-0 items-center gap-2.5 px-3 pt-3; }
+      .ico { @apply grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-line text-mute; }
+      .ttl { @apply truncate text-xs text-mute; }
+      .val { @apply flex items-center gap-1.5 text-base font-bold leading-tight; }
+      .cb { @apply p-3; }
+      .li { @apply flex min-w-0 items-center gap-2.5 border-b border-line py-2 last:border-0 last:pb-0; }
+      .av { @apply grid h-8 w-8 shrink-0 place-items-center rounded-full bg-soft text-[11px] font-bold text-brand; }
+      .ai { @apply grid h-8 w-8 shrink-0 place-items-center rounded-lg; }
+      .btn-o { @apply h-7 shrink-0 rounded-md border border-brand px-2.5 text-xs font-medium text-brand hover:bg-soft; }
+      .sel { @apply h-8 min-w-0 rounded-lg border border-line bg-card px-2 text-xs text-ink; }
+    }
+  </style>
+  <link rel="stylesheet" href="/css/app.css">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js"></script>
+</head>
+<body class="bg-bg font-sans text-sm text-ink antialiased">
+
+  <div id="sidebar-root"></div>
+
+  <div class="min-w-0 transition-[margin] duration-200 lg:ml-[var(--sw)]">
+    <div id="topbar-root"></div>
+
+    <main class="p-3 sm:p-5">
+      <div class="cq mx-auto max-w-[1500px] space-y-3">
+
+        <div class="flex flex-wrap items-end justify-between gap-2">
+          <div class="min-w-0">
+            <h1 class="truncate text-xl font-bold">Welcome back, John Doe</h1>
+            <p class="text-xs text-mute sm:text-sm">Master view of all 24 client workspaces. Wednesday, 18 November 2026.</p>
+          </div>
+          <div class="flex min-w-0 gap-2">
+            <select class="sel" aria-label="Client filter"><option>All clients</option><option>Sharma Garments</option><option>Urban Brew Café</option><option>Kapoor Jewellers</option><option>FitZone Gym</option><option>Glow Salon</option></select>
+            <select class="sel" aria-label="Period"><option>Last 30 days</option><option>Last 7 days</option><option>Last 90 days</option></select>
+          </div>
+        </div>
+
+        <section id="kpis" class="kp"></section>
+
+        <section class="rw r21">
+          <div class="card">
+            <div class="ch"><div class="ico"><i data-lucide="bar-chart-3" class="h-4 w-4"></i></div>
+              <div class="min-w-0"><div id="mt" class="ttl"></div><div id="mv" class="val"></div></div>
+              <div id="seg" class="ml-auto flex shrink-0 rounded-lg bg-bg p-0.5 text-xs">
+                <button data-m="spend" class="rounded-md bg-card px-2.5 py-1 font-medium shadow-sm">Spend</button>
+                <button data-m="leads" class="rounded-md px-2.5 py-1 font-medium text-mute">Leads</button></div></div>
+            <div class="cb"><div class="min-w-0"><svg id="bars" class="block w-full" role="img" aria-label="Monthly actual vs planned chart"></svg></div>
+              <div class="mt-1 flex flex-wrap justify-center gap-4 text-xs text-mute"><span class="flex items-center gap-1.5"><i class="h-2 w-2 rounded-full" style="background:var(--c1)"></i>Actual</span><span class="flex items-center gap-1.5"><i class="h-2 w-2 rounded-full" style="background:var(--gry)"></i>Planned</span></div></div>
+          </div>
+          <div class="card">
+            <div class="ch"><div class="ico"><i data-lucide="users" class="h-4 w-4"></i></div><div class="min-w-0"><div class="ttl">Lead pipeline</div><div class="val">3,284 <span class="chip">Won 13%</span></div></div></div>
+            <div class="cb flex flex-wrap items-center justify-center gap-4">
+              <svg id="donut" viewBox="0 0 128 128" class="h-32 w-32 shrink-0" role="img" aria-label="Lead status split"></svg>
+              <div id="dl" class="grid min-w-[150px] flex-1 gap-2.5"></div></div>
+          </div>
+        </section>
+
+        <section class="rw r3">
+          <div class="card">
+            <div class="ch"><div class="ico"><i data-lucide="image" class="h-4 w-4"></i></div><div class="min-w-0"><div class="ttl">Approval queue</div><div class="val">5 waiting</div></div></div>
+            <div id="appr" class="cb"></div>
+          </div>
+          <div class="card">
+            <div class="ch"><div class="ico"><i data-lucide="indian-rupee" class="h-4 w-4"></i></div><div class="min-w-0"><div class="ttl">Agency revenue (₹ lakh)</div><div class="val">6.8 <span class="chip">8.1%</span></div></div></div>
+            <div class="cb"><div class="min-w-0"><svg id="area" class="block w-full" role="img" aria-label="Agency revenue, last 12 months"></svg></div></div>
+          </div>
+          <div class="card">
+            <div class="ch"><div class="ico"><i data-lucide="alert-triangle" class="h-4 w-4"></i></div><div class="min-w-0"><div class="ttl">Needs attention</div><div class="val">8 items</div></div></div>
+            <div id="alerts" class="cb"></div>
+          </div>
+        </section>
+
+        <section class="rw r21">
+          <div class="card">
+            <div class="ch"><div class="ico"><i data-lucide="building-2" class="h-4 w-4"></i></div><div class="min-w-0"><div class="ttl">Top clients by spend</div><div class="val">Last 30 days</div></div>
+              <a href="clients.html" class="btn-o ml-auto inline-flex items-center">View all</a></div>
+            <div class="cb overflow-x-auto">
+              <table class="w-full min-w-[460px] text-[13px]">
+                <thead><tr class="text-left text-xs text-mute"><th class="py-1.5 pr-2 font-medium">Client</th><th class="px-2 font-medium">Campaigns</th><th class="px-2 font-medium">Spend</th><th class="px-2 font-medium">Leads</th><th class="pl-2 font-medium">Status</th></tr></thead>
+                <tbody id="tb"></tbody></table></div>
+          </div>
+          <div class="card">
+            <div class="ch"><div class="ico"><i data-lucide="scroll-text" class="h-4 w-4"></i></div><div class="min-w-0"><div class="ttl">Recent activity</div><div class="val">Audit trail</div></div></div>
+            <div id="act" class="cb"></div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Shared components (same on every page) -->
+  <script src="/component/modals.js"></script>
+  <script src="/component/sidebar.js"></script>
+  <script src="/component/topbar.js"></script>
+  <!-- Page script -->
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>
