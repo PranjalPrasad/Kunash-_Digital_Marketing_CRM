@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in – Kunash Digital Marketing CRM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="/css/app.css">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js"></script>
+  <script>
+    /* Apply saved theme before paint (same key as the topbar toggle) */
+    try { const s = localStorage.getItem('theme'); document.documentElement.classList.toggle('dark', s ? s === 'dark' : matchMedia('(prefers-color-scheme:dark)').matches); } catch (e) {}
+  </script>
+</head>
+<body class="bg-bg font-sans text-sm text-ink antialiased">
+
+  <div class="grid min-h-screen lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+
+    <!-- Form side -->
+    <main class="flex flex-col px-5 py-6 sm:px-10">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2 text-lg font-bold text-brand">
+          <span class="grid h-8 w-8 place-items-center rounded-lg bg-brand text-white">K</span>Kunash CRM
+        </div>
+        <button id="theme" type="button" aria-label="Toggle dark mode" class="grid h-8 w-8 place-items-center rounded-lg border border-line text-mute hover:bg-hov">
+          <i data-lucide="moon" class="h-4 w-4"></i>
+        </button>
+      </div>
+
+      <div class="mx-auto flex w-full max-w-[380px] flex-1 flex-col justify-center py-10">
+        <h1 class="text-2xl font-bold">Welcome back</h1>
+        <p class="mt-1 text-mute">Sign in to manage your clients, campaigns and creatives.</p>
+
+        <div id="error" role="alert" class="mt-5 hidden items-start gap-2 rounded-lg bg-[var(--redbg)] px-3 py-2.5 text-xs font-medium text-[var(--red)]">
+          <i data-lucide="alert-circle" class="mt-px h-4 w-4 shrink-0"></i><span id="errtext"></span>
+        </div>
+
+        <form id="login" class="mt-5 space-y-4" novalidate>
+          <div>
+            <label for="email" class="mb-1.5 block text-xs font-semibold">Email</label>
+            <div class="relative">
+              <i data-lucide="mail" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-mute"></i>
+              <input id="email" type="email" autocomplete="username" placeholder="you@agency.com" required
+                class="h-10 w-full rounded-lg border border-line bg-card pl-9 pr-3 text-ink placeholder:text-mute focus:border-brand">
+            </div>
+          </div>
+
+          <div>
+            <div class="mb-1.5 flex items-center justify-between">
+              <label for="password" class="text-xs font-semibold">Password</label>
+              <button type="button" id="forgot" class="text-xs font-medium text-brand hover:underline">Forgot password?</button>
+            </div>
+            <div class="relative">
+              <i data-lucide="lock" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-mute"></i>
+              <input id="password" type="password" autocomplete="current-password" placeholder="Enter your password" required
+                class="h-10 w-full rounded-lg border border-line bg-card pl-9 pr-10 text-ink placeholder:text-mute focus:border-brand">
+              <button type="button" id="toggle" aria-label="Show password" class="absolute right-1.5 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center rounded-md text-mute hover:bg-hov">
+                <i data-lucide="eye" class="h-4 w-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <label class="flex cursor-pointer items-center gap-2 text-xs text-mute">
+            <input id="remember" type="checkbox" class="h-4 w-4 rounded border-line accent-[var(--or)]"> Keep me signed in on this device
+          </label>
+
+          <button id="submit" type="submit" class="flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-brand font-semibold text-white hover:opacity-90 disabled:opacity-60">
+            <span id="btntext">Sign in</span>
+          </button>
+        </form>
+
+        <!-- Demo credentials -->
+        <div class="mt-7 rounded-xl border border-line bg-card p-3">
+          <div class="flex items-center gap-1.5 text-xs font-semibold"><i data-lucide="key-round" class="h-3.5 w-3.5 text-brand"></i> Demo credentials</div>
+          <p class="mt-0.5 text-xs text-mute">Click a role to fill the form. Password for all: <code class="rounded bg-hov px-1 font-semibold text-ink">Kunash@123</code></p>
+          <div id="demo" class="mt-2.5 grid gap-1.5 sm:grid-cols-2"></div>
+        </div>
+      </div>
+
+      <p class="text-center text-xs text-mute">© 2026 Kunash Digital Marketing. All rights reserved.</p>
+    </main>
+
+    <!-- Brand side -->
+    <aside class="relative hidden overflow-hidden bg-brand p-12 text-white lg:flex lg:flex-col lg:justify-center" aria-hidden="true">
+      <div class="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/10"></div>
+      <div class="absolute -bottom-32 -left-16 h-96 w-96 rounded-full bg-white/10"></div>
+      <div class="relative max-w-md">
+        <h2 class="text-3xl font-bold leading-tight">One workspace for every client, campaign and creative.</h2>
+        <p class="mt-3 text-white/80">Track spend, approvals, leads and billing for all your client businesses from a single panel.</p>
+        <div class="mt-8 grid grid-cols-3 gap-3">
+          <div class="rounded-xl bg-white/15 p-3"><div class="text-xl font-bold">20+</div><div class="text-xs text-white/80">Client workspaces</div></div>
+          <div class="rounded-xl bg-white/15 p-3"><div class="text-xl font-bold">Meta</div><div class="text-xs text-white/80">Facebook &amp; Instagram</div></div>
+          <div class="rounded-xl bg-white/15 p-3"><div class="text-xl font-bold">Google</div><div class="text-xs text-white/80">Ads</div></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    /* DEMO ONLY: these credentials live in the browser. Replace authenticate() with a real API call before going live. */
+    const USERS = [
+      { email: 'owner@kunash.com',   name: 'John Doe',     role: 'Agency owner' },
+      { email: 'manager@kunash.com', name: 'Asha Patil',   role: 'Manager' },
+      { email: 'ads@kunash.com',     name: 'Rohan Mehta',  role: 'Ads manager' },
+      { email: 'designer@kunash.com',name: 'Neha Kulkarni',role: 'Designer' },
+      { email: 'client@kunash.com',  name: 'Client Admin', role: 'Client admin' },
+      { email: 'viewer@kunash.com',  name: 'Client Viewer',role: 'Client viewer' }
+    ];
+    const PASSWORD = 'Kunash@123';
+
+    const $ = (id) => document.getElementById(id);
+    const email = $('email'), pass = $('password'), err = $('error');
+
+    function authenticate(e, p) {
+      const u = USERS.find(x => x.email === e.trim().toLowerCase());
+      return u && p === PASSWORD ? u : null;
+    }
+    function showError(msg) { $('errtext').textContent = msg; err.classList.remove('hidden'); err.classList.add('flex'); }
+    function hideError() { err.classList.add('hidden'); err.classList.remove('flex'); }
+
+    // Already signed in? Go straight to the dashboard.
+    try { if (localStorage.getItem('kunash-session') || sessionStorage.getItem('kunash-session')) location.replace('dashboard.html'); } catch (e) {}
+
+    // Demo role chips
+    $('demo').innerHTML = USERS.map((u, i) =>
+      `<button type="button" data-i="${i}" class="min-w-0 rounded-lg border border-line px-2.5 py-1.5 text-left hover:bg-hov">
+         <b class="block truncate text-xs">${u.role}</b><span class="block truncate text-[11px] text-mute">${u.email}</span></button>`).join('');
+    $('demo').onclick = (ev) => {
+      const b = ev.target.closest('button'); if (!b) return;
+      email.value = USERS[b.dataset.i].email; pass.value = PASSWORD; hideError(); pass.focus();
+    };
+
+    // Show / hide password
+    $('toggle').onclick = () => {
+      const show = pass.type === 'password';
+      pass.type = show ? 'text' : 'password';
+      $('toggle').innerHTML = `<i data-lucide="${show ? 'eye-off' : 'eye'}" class="h-4 w-4"></i>`;
+      $('toggle').setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      lucide.createIcons();
+    };
+
+    $('forgot').onclick = () => showError('Password reset is not set up yet. Please contact your agency owner.');
+
+    // Theme toggle (shares the key used by the app's topbar)
+    $('theme').onclick = () => { const d = document.documentElement.classList.toggle('dark'); try { localStorage.setItem('theme', d ? 'dark' : 'light'); } catch (e) {} };
+
+    $('login').addEventListener('submit', (ev) => {
+      ev.preventDefault(); hideError();
+      if (!email.value.trim() || !pass.value) return showError('Enter both your email and password.');
+      if (!/^\S+@\S+\.\S+$/.test(email.value.trim())) return showError('Enter a valid email address.');
+
+      $('submit').disabled = true; $('btntext').textContent = 'Signing in…';
+      setTimeout(() => {
+        const user = authenticate(email.value, pass.value);
+        if (!user) {
+          $('submit').disabled = false; $('btntext').textContent = 'Sign in';
+          pass.value = ''; pass.focus();
+          return showError('Incorrect email or password. Please try again.');
+        }
+        const session = JSON.stringify({ email: user.email, name: user.name, role: user.role, at: Date.now() });
+        try { (($('remember').checked ? localStorage : sessionStorage)).setItem('kunash-session', session); } catch (e) {}
+        location.href = 'dashboard.html';
+      }, 500);
+    });
+
+    lucide.createIcons();
+    email.focus();
+  </script>
+</body>
+</html>
