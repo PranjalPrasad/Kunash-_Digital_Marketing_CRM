@@ -2,7 +2,7 @@
 (function () {
   const A = window.AdDesk, H = document.documentElement;
   /* Pages that exist. Add a file name here when you build a new page. */
-  const BUILT = ['dashboard.html', 'clients.html', 'campaigns.html','creatives.html'];
+  const BUILT = ['dashboard.html', 'clients.html', 'campaigns.html', 'creatives.html', 'media.html', 'products.html', 'tasks.html', 'leads.html'];
   const NAV = [
     ['Overview', [['layout-dashboard', 'Dashboard', 'dashboard.html'], ['building-2', 'Clients', 'clients.html'], ['megaphone', 'Campaigns', 'campaigns.html']]],
     ['Work', [['image', 'Creatives & approvals', 'creatives.html', 6], ['folder-open', 'Media library', 'media.html'], ['tags', 'Products & prices', 'products.html'], ['list-checks', 'Tasks', 'tasks.html']]],
@@ -17,7 +17,7 @@
   <div id="scrim" class="fixed inset-0 z-30 hidden bg-black/40 lg:hidden"></div>
   <aside id="sidebar" aria-label="Main navigation" class="fixed inset-y-0 left-0 z-40 flex w-[248px] -translate-x-full flex-col overflow-hidden border-r border-line bg-card transition-[width,transform] duration-200 lg:w-[var(--sw)] lg:translate-x-0">
     <div class="flex h-14 shrink-0 items-center gap-2 px-3">
-      <a href="dashboard.html" class="brandlink flex min-w-0 items-center gap-2 text-lg font-bold text-brand"><span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-brand text-white">K</span><span class="truncate">Kunash CRM </span></a>
+      <a href="dashboard.html" class="brandlink flex min-w-0 items-center gap-2 text-lg font-bold text-brand"><span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-brand text-white">A</span><span class="truncate">AdDesk</span></a>
       <button id="collapse" aria-label="Collapse or expand sidebar" class="${ib} ml-auto hidden lg:grid"><i data-lucide="panel-left-close" class="ic-close h-4 w-4"></i><i data-lucide="panel-left-open" class="ic-open h-4 w-4"></i></button>
       <button id="sclose" aria-label="Close menu" class="${ib} ml-auto grid lg:hidden"><i data-lucide="x" class="h-4 w-4"></i></button>
     </div>

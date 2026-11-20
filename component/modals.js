@@ -21,16 +21,39 @@
   A.clients = ['Sharma Garments', 'Urban Brew Café', 'Kapoor Jewellers', 'FitZone Gym', 'Glow Salon'];
   A.people = { manager: ['Riya Shah', 'Kabir Jain', 'Neha Rao'], ads: ['Rohan Gupta', 'Sneha Iyer'], designer: ['Priya Menon', 'Arjun Das'] };
   const P = A.people;
+  A.team = [...P.manager, ...P.ads, ...P.designer, 'John Doe'];
+  A.owners = ['Unassigned', ...A.team];
   const FORMS = {
     client: { t: 'New client', ok: 'Create client', f: [['name', 'Business name', 'text', 0, 1, 1], ['contact', 'Contact person', 'text'], ['phone', 'Phone', 'tel'], ['email', 'Email', 'email', 0, 1], ['plan', 'Service package', 'select', ['Starter', 'Growth', 'Premium']], ['manager', 'Assign manager', 'select', P.manager], ['website', 'Website', 'url', 0, 0, 1]] },
     campaign: { t: 'New campaign', ok: 'Save draft', f: [['client', 'Client', 'select', '$c', 1], ['name', 'Campaign name', 'text', 0, 1], ['platform', 'Platform', 'select', ['Meta', 'Google Ads', 'Meta + Google']], ['objective', 'Objective', 'select', ['Leads', 'Traffic', 'Sales', 'Awareness']], ['budget', 'Budget (₹)', 'number', 0, 1], ['start', 'Start date', 'date'], ['end', 'End date', 'date'], ['brief', 'Brief', 'textarea', 0, 0, 1]] },
-    creative: { t: 'Upload creative', ok: 'Submit for approval', f: [['client', 'Client', 'select', '$c', 1], ['title', 'Creative title', 'text', 0, 1], ['file', 'Image or video', 'file', 0, 1, 1], ['caption', 'Caption', 'textarea', 0, 0, 1], ['link', 'Destination link', 'url', 0, 0, 1]] },
+    creative: { t: 'Upload creative', ok: 'Submit for approval', f: [['client', 'Client', 'select', '$c', 1], ['title', 'Creative title', 'text', 0, 1], ['format', 'Format', 'select', ['Image', 'Carousel', 'Video']], ['offer', 'Offer', 'text'], ['file', 'Image or video', 'file', 0, 1, 1], ['caption', 'Caption', 'textarea', 0, 0, 1], ['link', 'Destination link', 'url', 0, 0, 1]] },
+    creativeEdit: { t: 'Edit creative details', ok: 'Save changes', f: [['title', 'Creative title', 'text', 0, 1, 1], ['format', 'Format', 'select', ['Image', 'Carousel', 'Video']], ['offer', 'Offer', 'text'], ['link', 'Destination link', 'url', 0, 0, 1], ['caption', 'Caption', 'textarea', 0, 0, 1]] },
+    version: { t: 'Upload new version', ok: 'Submit for approval', f: [['creative', 'Creative', 'text', 0, 0, 1, 1], ['file', 'New version file', 'file', 0, 1, 1], ['note', 'What changed', 'textarea', 0, 1, 1]] },
+    decision: { t: 'Record client decision', ok: 'Save decision', f: [['creative', 'Creative', 'text', 0, 0, 1, 1], ['decision', 'Decision', 'select', ['Approved', 'Changes requested'], 1], ['by', 'Decided by', 'text', 0, 1], ['comment', 'Client comment', 'textarea', 0, 0, 1]] },
+    comment: { t: 'Add comment', ok: 'Post comment', f: [['creative', 'Creative', 'text', 0, 0, 1, 1], ['comment', 'Comment', 'textarea', 0, 1, 1]] },
     clientEdit: { t: 'Edit client', ok: 'Save changes', f: [['name', 'Business name', 'text', 0, 1, 1], ['contact', 'Contact person', 'text'], ['phone', 'Phone', 'tel'], ['email', 'Email', 'email', 0, 1], ['plan', 'Service package', 'select', ['Starter', 'Growth', 'Premium']], ['manager', 'Manager', 'select', P.manager], ['status', 'Status', 'select', ['Active', 'Inactive']], ['website', 'Website', 'text']] },
     invite: { t: 'Invite client', ok: 'Send invite', f: [['client', 'Client', 'select', '$c', 1], ['email', 'Invite email', 'email', 0, 1], ['role', 'Access', 'select', ['Client admin', 'Client viewer']], ['msg', 'Message', 'textarea', 0, 0, 1]] },
     team: { t: 'Assign team', ok: 'Save team', f: [['client', 'Client', 'select', '$c', 1], ['manager', 'Manager', 'select', P.manager], ['ads', 'Ads manager', 'select', P.ads], ['designer', 'Designer', 'select', P.designer]] },
     campaignEdit: { t: 'Edit campaign', ok: 'Save changes', f: [['name', 'Campaign name', 'text', 0, 1, 1], ['client', 'Client', 'select', '$c', 1], ['platform', 'Platform', 'select', ['Meta', 'Google Ads', 'Meta + Google']], ['objective', 'Objective', 'select', ['Leads', 'Traffic', 'Sales', 'Awareness']], ['budget', 'Budget (₹)', 'number', 0, 1], ['start', 'Start date', 'date'], ['end', 'End date', 'date'], ['brief', 'Brief', 'textarea', 0, 0, 1]] },
     pause: { t: 'Pause campaign', ok: 'Pause campaign', f: [['campaign', 'Campaign', 'text', 0, 0, 1, 1], ['reason', 'Reason', 'select', ['Budget reached', 'Client request', 'Creative outdated', 'Ad account issue', 'Other'], 1, 1], ['note', 'Note for the change log', 'textarea', 0, 0, 1]] },
-    lead: { t: 'Add lead', ok: 'Add lead', f: [['name', 'Name', 'text', 0, 1], ['phone', 'Phone', 'tel', 0, 1], ['client', 'Client', 'select', '$c', 1], ['source', 'Source', 'select', ['Meta Lead Ad', 'Google Ads', 'Website', 'Manual']], ['note', 'Notes', 'textarea', 0, 0, 1]] },
+    media: { t: 'Upload media', ok: 'Upload', f: [['folder', 'Folder', 'select', '$f', 1, 1], ['files', 'Files (images, videos, documents)', 'file', 0, 1, 1], ['tags', 'Tags (comma separated)', 'text', 0, 0, 1]] },
+    mediaEdit: { t: 'Edit file', ok: 'Save changes', f: [['name', 'File name', 'text', 0, 1, 1], ['folder', 'Folder', 'select', '$f', 1, 1], ['tags', 'Tags (comma separated)', 'text', 0, 0, 1]] },
+    move: { t: 'Move files', ok: 'Move', f: [['label', 'Files', 'text', 0, 0, 1, 1], ['folder', 'Move to folder', 'select', '$f', 1, 1]] },
+    folder: { t: 'New folder', ok: 'Create folder', f: [['name', 'Folder name', 'text', 0, 1, 1], ['note', 'Description', 'textarea', 0, 0, 1]] },
+    delete: { t: 'Delete files', ok: 'Delete', f: [['label', 'Files', 'text', 0, 0, 1, 1], ['note', 'Reason (optional)', 'textarea', 0, 0, 1]] },
+    product: { t: 'New product or service', ok: 'Add product', f: [['client', 'Client', 'select', '$c', 1], ['name', 'Name', 'text', 0, 1], ['type', 'Type', 'select', ['Product', 'Service', 'Package', 'Offer']], ['unit', 'Unit (per kg, per month...)', 'text'], ['price', 'Price (₹)', 'number', 0, 1], ['offer', 'Offer price (₹, optional)', 'number'], ['desc', 'Description', 'textarea', 0, 0, 1]] },
+    productEdit: { t: 'Edit product', ok: 'Save changes', f: [['name', 'Name', 'text', 0, 1, 1], ['client', 'Client', 'select', '$c', 1], ['type', 'Type', 'select', ['Product', 'Service', 'Package', 'Offer']], ['unit', 'Unit', 'text', 0, 0, 1], ['desc', 'Description', 'textarea', 0, 0, 1]] },
+    price: { t: 'Change price', ok: 'Update price', f: [['product', 'Product', 'text', 0, 0, 1, 1], ['current', 'Current price', 'text', 0, 0, 1, 1], ['price', 'New price (₹)', 'number', 0, 1], ['offer', 'New offer price (₹)', 'number'], ['reason', 'Reason', 'select', ['Client request', 'Festival offer', 'Cost change', 'Competitor pricing', 'Correction'], 1, 1], ['impact', 'What will happen', 'textarea', 0, 0, 1, 1], ['note', 'Note', 'textarea', 0, 0, 1]] },
+    task: { t: 'New task', ok: 'Create task', f: [['title', 'Task title', 'text', 0, 1, 1], ['client', 'Client', 'select', '$c', 1], ['assignee', 'Assign to', 'select', '$t', 1], ['priority', 'Priority', 'select', ['Low', 'Medium', 'High', 'Urgent']], ['due', 'Due date', 'date', 0, 1], ['status', 'Status', 'select', ['To do', 'In progress', 'In review', 'Done']], ['related', 'Related to (campaign, creative...)', 'text', 0, 0, 1], ['desc', 'Description', 'textarea', 0, 0, 1]] },
+    taskEdit: { t: 'Edit task', ok: 'Save changes', f: [['title', 'Task title', 'text', 0, 1, 1], ['client', 'Client', 'select', '$c', 1], ['assignee', 'Assign to', 'select', '$t', 1], ['priority', 'Priority', 'select', ['Low', 'Medium', 'High', 'Urgent']], ['due', 'Due date', 'date', 0, 1], ['status', 'Status', 'select', ['To do', 'In progress', 'In review', 'Done']], ['related', 'Related to (campaign, creative...)', 'text', 0, 0, 1], ['desc', 'Description', 'textarea', 0, 0, 1]] },
+    taskComment: { t: 'Add comment', ok: 'Post comment', f: [['label', 'Task', 'text', 0, 0, 1, 1], ['comment', 'Comment', 'textarea', 0, 1, 1]] },
+    taskDelete: { t: 'Delete task', ok: 'Delete task', f: [['label', 'Task', 'text', 0, 0, 1, 1], ['note', 'Reason (optional)', 'textarea', 0, 0, 1]] },
+    lead: { t: 'Add lead', ok: 'Add lead', f: [['name', 'Name', 'text', 0, 1], ['phone', 'Phone', 'tel', 0, 1], ['email', 'Email', 'email'], ['client', 'Client', 'select', '$c', 1], ['source', 'Source', 'select', ['Meta Lead Ad', 'Google Ads', 'Website', 'Manual']], ['rating', 'Interest', 'select', ['Hot', 'Warm', 'Cold']], ['owner', 'Assign to', 'select', '$o'], ['value', 'Potential value (₹)', 'number'], ['followup', 'Follow-up date', 'date'], ['campaign', 'Campaign', 'text'], ['note', 'Notes', 'textarea', 0, 0, 1]] },
+    leadEdit: { t: 'Edit lead', ok: 'Save changes', f: [['name', 'Name', 'text', 0, 1], ['phone', 'Phone', 'tel', 0, 1], ['email', 'Email', 'email'], ['client', 'Client', 'select', '$c', 1], ['source', 'Source', 'select', ['Meta Lead Ad', 'Google Ads', 'Website', 'Manual']], ['rating', 'Interest', 'select', ['Hot', 'Warm', 'Cold']], ['owner', 'Assign to', 'select', '$o'], ['value', 'Potential value (₹)', 'number'], ['followup', 'Follow-up date', 'date'], ['campaign', 'Campaign', 'text'], ['note', 'Notes', 'textarea', 0, 0, 1]] },
+    followup: { t: 'Schedule follow-up', ok: 'Save follow-up', f: [['label', 'Lead', 'text', 0, 0, 1, 1], ['followup', 'Next follow-up', 'date', 0, 1, 1], ['note', 'Note', 'textarea', 0, 0, 1]] },
+    leadNote: { t: 'Add note', ok: 'Save note', f: [['label', 'Lead', 'text', 0, 0, 1, 1], ['comment', 'Note', 'textarea', 0, 1, 1]] },
+    leadLost: { t: 'Mark lead as lost', ok: 'Mark as lost', f: [['label', 'Lead', 'text', 0, 0, 1, 1], ['reason', 'Reason', 'select', ['Not interested', 'Price too high', 'No response', 'Outside service area', 'Chose a competitor', 'Duplicate or fake'], 1, 1], ['note', 'Note', 'textarea', 0, 0, 1]] },
+    leadDelete: { t: 'Delete lead', ok: 'Delete lead', f: [['label', 'Lead', 'text', 0, 0, 1, 1], ['note', 'Reason (optional)', 'textarea', 0, 0, 1]] },
     invoice: { t: 'Create invoice', ok: 'Create invoice', f: [['client', 'Client', 'select', '$c', 1], ['due', 'Due date', 'date', 0, 1], ['item', 'Description', 'text', 0, 1, 1], ['amount', 'Amount (₹)', 'number', 0, 1], ['tax', 'GST', 'select', ['18%', '12%', '5%', 'None']]] },
     remind: { t: 'Send reminder', ok: 'Send reminder', f: [['client', 'Client', 'select', '$c', 1], ['msg', 'Message', 'textarea', 0, 1, 1]] },
   };
@@ -39,10 +62,13 @@
   const field = ([n, l, t, o, r, full, ro], v) => {
     const req = r ? 'required' : '';
     if (o === '$c') o = A.clients;
+    if (o === '$f') o = A.folders;
+    if (o === '$t') o = A.team;
+    if (o === '$o') o = A.owners;
     let c;
     if (t === 'select') c = `<select name="${n}" ${req} class="${inp} h-9">${o.map((y) => `<option ${v[n] === y ? 'selected' : ''}>${y}</option>`).join('')}</select>`;
-    else if (t === 'textarea') c = `<textarea name="${n}" rows="3" ${req} class="${inp} resize-none py-2">${v[n] || ''}</textarea>`;
-    else c = `<input name="${n}" type="${t}" ${req} ${ro ? 'readonly' : ''} ${t !== 'file' && v[n] != null ? `value="${String(v[n]).replace(/"/g, '&quot;')}"` : ''} class="${inp} ${t === 'file' ? 'py-1.5' : 'h-9'}">`;
+    else if (t === 'textarea') c = `<textarea name="${n}" rows="3" ${req} ${ro ? 'readonly' : ''} class="${inp} resize-none py-2">${v[n] || ''}</textarea>`;
+    else c = `<input name="${n}" type="${t}" ${req} ${ro ? 'readonly' : ''} ${n === 'files' ? 'multiple' : ''} ${t !== 'file' && v[n] != null ? `value="${String(v[n]).replace(/"/g, '&quot;')}"` : ''} class="${inp} ${t === 'file' ? 'py-1.5' : 'h-9'}">`;
     return `<label class="block min-w-0 ${full ? 'sm:col-span-2' : ''}"><span class="mb-1 block text-xs font-medium text-mute">${l}${r ? ' *' : ''}</span>${c}</label>`;
   };
 
@@ -62,6 +88,8 @@
     root.querySelector('form').addEventListener('submit', (e) => {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(e.target));
+      const fi = e.target.querySelector('input[type=file]');
+      if (fi) data.files = [...fi.files].map((f) => ({ name: f.name, size: f.size, type: f.type }));
       A.closeForm(); A.toast(d.t + ': saved (demo)');
       document.dispatchEvent(new CustomEvent('form:saved', { detail: { key, data, vals } }));
     });
