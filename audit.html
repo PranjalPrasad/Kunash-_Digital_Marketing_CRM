@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Audit log – Kunash Digital Marketing CRM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/js/tailwind-config.js"></script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .card { @apply min-w-0 overflow-hidden rounded-xl border border-line bg-card; }
+      .ico { @apply grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-line text-mute; }
+      .ttl { @apply truncate text-xs text-mute; }
+      .av { @apply grid h-8 w-8 shrink-0 place-items-center rounded-full bg-soft text-[11px] font-bold text-brand; }
+      .btn-o { @apply inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg border border-brand px-3 text-xs font-medium text-brand hover:bg-soft; }
+      .btn-p { @apply inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg bg-brand px-3 text-xs font-semibold text-white; }
+      .sel { @apply h-8 min-w-0 rounded-lg border border-line bg-card px-2 text-xs text-ink; }
+      .ibtn { @apply grid h-7 w-7 shrink-0 place-items-center rounded-md border border-line text-mute hover:bg-hov hover:text-ink; }
+    }
+  </style>
+  <link rel="stylesheet" href="/css/app.css">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js"></script>
+</head>
+<body class="bg-bg font-sans text-sm text-ink antialiased">
+
+  <div id="sidebar-root"></div>
+
+  <div class="min-w-0 transition-[margin] duration-200 lg:ml-[var(--sw)]">
+    <div id="topbar-root"></div>
+
+    <main class="p-3 sm:p-5">
+      <div class="cq mx-auto max-w-[1500px] space-y-3">
+
+        <div class="flex flex-wrap items-end justify-between gap-2">
+          <div class="min-w-0">
+            <h1 class="truncate text-xl font-bold">Audit log</h1>
+            <p class="text-xs text-mute sm:text-sm">Who did what and when: price changes, approvals, campaign edits, user access, billing, sign-ins and exports.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button class="btn-o" data-act="verify"><i data-lucide="shield-check" class="h-3.5 w-3.5"></i>Verify integrity</button>
+            <button class="btn-p" data-act="export"><i data-lucide="download" class="h-3.5 w-3.5"></i>Export CSV</button>
+          </div>
+        </div>
+
+        <section id="kpis" class="kp"></section>
+
+        <div class="card">
+          <div id="bar" class="flex flex-wrap items-center gap-2 border-b border-line p-3">
+            <label class="flex h-8 min-w-[160px] flex-1 items-center gap-2 rounded-lg border border-line px-2.5 text-mute">
+              <i data-lucide="search" class="h-3.5 w-3.5 shrink-0"></i>
+              <input id="q" aria-label="Search audit log" placeholder="Search user, action or item" class="w-full min-w-0 bg-transparent text-xs text-ink outline-none">
+            </label>
+            <select id="fc" class="sel" aria-label="Category"></select>
+            <select id="fu" class="sel" aria-label="User"></select>
+            <select id="fl" class="sel" aria-label="Client"></select>
+            <select id="fd" class="sel" aria-label="Date range">
+              <option value="">All time</option><option value="today">Today</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="custom">Custom range</option>
+            </select>
+            <span id="cust" class="hidden items-center gap-1.5">
+              <input type="date" id="d1" class="sel" aria-label="From date"><span class="text-xs text-mute">to</span><input type="date" id="d2" class="sel" aria-label="To date">
+            </span>
+            <label class="flex h-8 items-center gap-1.5 whitespace-nowrap text-xs"><input type="checkbox" id="fx"> Sensitive only</label>
+          </div>
+          <div id="list" class="min-w-0"></div>
+          <div id="pager" class="flex flex-wrap items-center justify-between gap-2 border-t border-line px-3 py-2 text-xs text-mute"></div>
+          <div class="flex items-center gap-2 border-t border-line px-3 py-2 text-xs text-mute"><i data-lucide="lock" class="h-3.5 w-3.5 shrink-0"></i>Entries are read-only. Nobody, including the agency owner, can edit or delete them.</div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/component/modals.js"></script>
+  <script src="/component/sidebar.js"></script>
+  <script src="/component/topbar.js"></script>
+  <script src="/js/audit.js"></script>
+</body>
+</html>

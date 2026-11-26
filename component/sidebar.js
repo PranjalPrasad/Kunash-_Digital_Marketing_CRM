@@ -2,7 +2,7 @@
 (function () {
   const A = window.AdDesk, H = document.documentElement;
   /* Pages that exist. Add a file name here when you build a new page. */
-  const BUILT = ['dashboard.html', 'clients.html', 'campaigns.html', 'creatives.html', 'media.html', 'products.html', 'tasks.html', 'leads.html', 'reports.html', 'invoices.html', 'pricing.html', 'users.html'];
+  const BUILT = ['dashboard.html', 'clients.html', 'campaigns.html', 'creatives.html', 'media.html', 'products.html', 'tasks.html', 'leads.html', 'reports.html', 'invoices.html', 'pricing.html', 'users.html', 'integrations.html', 'audit.html', 'settings.html'];
   const NAV = [
     ['Overview', [['layout-dashboard', 'Dashboard', 'dashboard.html'], ['building-2', 'Clients', 'clients.html'], ['megaphone', 'Campaigns', 'campaigns.html']]],
     ['Work', [['image', 'Creatives & approvals', 'creatives.html', 6], ['folder-open', 'Media library', 'media.html'], ['tags', 'Products & prices', 'products.html'], ['list-checks', 'Tasks', 'tasks.html']]],
