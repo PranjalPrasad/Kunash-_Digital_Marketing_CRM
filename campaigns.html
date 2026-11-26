@@ -37,7 +37,7 @@
             <h1 class="truncate text-xl font-bold">Campaigns</h1>
             <p class="text-xs text-mute sm:text-sm">Plan, publish and track campaigns. Only approved creatives can go live.</p>
           </div>
-          <button class="btn-p" data-form="campaign"><i data-lucide="plus" class="h-3.5 w-3.5"></i>New campaign</button>
+          <div class="flex flex-wrap gap-2"><button class="btn-o" data-form="googleAd"><i data-lucide="search" class="h-3.5 w-3.5"></i>Run Google ad</button><button class="btn-o" data-form="waCampaign"><i data-lucide="message-circle" class="h-3.5 w-3.5"></i>Run WhatsApp campaign</button><button class="btn-p" data-form="campaign"><i data-lucide="plus" class="h-3.5 w-3.5"></i>New campaign</button></div>
         </div>
 
         <section id="kpis" class="kp"></section>
@@ -50,7 +50,7 @@
               <input id="q" aria-label="Search campaigns" placeholder="Search by campaign or client" class="w-full min-w-0 bg-transparent text-xs text-ink outline-none">
             </label>
             <select id="fc" class="sel" aria-label="Client"></select>
-            <select id="fp" class="sel" aria-label="Platform"><option value="">All platforms</option><option>Meta</option><option>Google Ads</option><option>Meta + Google</option></select>
+            <select id="fp" class="sel" aria-label="Platform"><option value="">All platforms</option><option>Meta</option><option>Google Ads</option><option>Meta + Google</option><option>WhatsApp</option><option>LinkedIn</option></select>
             <select id="so" class="sel" aria-label="Sort"><option value="new">Sort: Newest</option><option value="name">Sort: Name</option><option value="budget">Sort: Budget</option><option value="spent">Sort: Spend</option><option value="leads">Sort: Leads</option></select>
             <div id="vt" class="flex shrink-0 rounded-lg bg-bg p-0.5">
               <button data-v="table" aria-label="Table view" class="grid h-7 w-7 place-items-center rounded-md"><i data-lucide="list" class="h-4 w-4"></i></button>

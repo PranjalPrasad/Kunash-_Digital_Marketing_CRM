@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reports – AdDesk CRM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/js/tailwind-config.js"></script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .card { @apply min-w-0 overflow-hidden rounded-xl border border-line bg-card; }
+      .ch { @apply flex min-w-0 items-center gap-2.5 px-3 pt-3; }
+      .ico { @apply grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-line text-mute; }
+      .ttl { @apply truncate text-xs text-mute; }
+      .val { @apply flex items-center gap-1.5 text-base font-bold leading-tight; }
+      .cb { @apply p-3; }
+      .btn-o { @apply inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg border border-brand px-3 text-xs font-medium text-brand hover:bg-soft; }
+      .btn-p { @apply inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg bg-brand px-3 text-xs font-semibold text-white; }
+      .sel { @apply h-8 min-w-0 rounded-lg border border-line bg-card px-2 text-xs text-ink; }
+      .ibtn { @apply grid h-7 w-7 shrink-0 place-items-center rounded-md border border-line text-mute hover:bg-hov hover:text-ink; }
+    }
+  </style>
+  <style>
+    @media print {
+      #sidebar-root, #topbar-root, .no-print { display: none !important; }
+      .report-wrap { margin-left: 0 !important; }
+      body { background: #fff; }
+    }
+  </style>
+  <link rel="stylesheet" href="/css/app.css">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js"></script>
+</head>
+<body class="bg-bg font-sans text-sm text-ink antialiased">
+
+  <div id="sidebar-root"></div>
+
+  <div class="report-wrap min-w-0 transition-[margin] duration-200 lg:ml-[var(--sw)]">
+    <div id="topbar-root"></div>
+
+    <main class="p-3 sm:p-5">
+      <div class="cq mx-auto max-w-[1500px] space-y-3">
+
+        <div class="flex flex-wrap items-end justify-between gap-2">
+          <div class="min-w-0">
+            <h1 class="truncate text-xl font-bold">Reports</h1>
+            <p id="sub" class="text-xs text-mute sm:text-sm"></p>
+          </div>
+          <div class="no-print flex flex-wrap gap-2">
+            <button class="btn-o" data-act="csv"><i data-lucide="download" class="h-3.5 w-3.5"></i>Export CSV</button>
+            <button class="btn-o" data-act="print"><i data-lucide="printer" class="h-3.5 w-3.5"></i>Print / PDF</button>
+            <button class="btn-o" data-form="schedule"><i data-lucide="calendar-clock" class="h-3.5 w-3.5"></i>Schedule</button>
+            <button class="btn-p" data-form="report"><i data-lucide="file-plus" class="h-3.5 w-3.5"></i>Generate report</button>
+          </div>
+        </div>
+
+        <div class="no-print card flex flex-wrap items-center gap-2 p-3">
+          <span class="flex items-center gap-1.5 text-xs font-medium text-mute"><i data-lucide="sliders-horizontal" class="h-3.5 w-3.5"></i>Filters</span>
+          <select id="fp" class="sel" aria-label="Period"><option>Last 3 months</option><option selected>Last 6 months</option><option>Last 12 months</option><option>This year</option></select>
+          <select id="fc" class="sel" aria-label="Client"></select>
+          <select id="fl" class="sel" aria-label="Platform"><option value="">All platforms</option><option>Meta</option><option>Google Ads</option></select>
+        </div>
+
+        <section id="kpis" class="kp"></section>
+
+        <section class="rw r21">
+          <div class="card">
+            <div class="ch"><div class="ico"><i data-lucide="bar-chart-3" class="h-4 w-4"></i></div><div class="min-w-0"><div class="ttl">Ad spend and leads by month</div><div id="sv" class="val"></div></div></div>
+            <div class="cb"><div class="min-w-0"><svg id="combo" class="block w-full" role="img" aria-label="Ad spend and leads by month"></svg></div>
+              <div class="mt-1 flex flex-wrap justify-center gap-4 text-xs text-mute"><span class="flex items-center gap-1.5"><i class="h-2 w-2 rounded-sm" style="background:var(--c1)"></i>Ad spend (₹ lakh)</span><span class="flex items-center gap-1.5"><i class="h-2 w-2 rounded-full" style="background:var(--ink)"></i>Leads</span></div></div>
+          </div>
+          <div class="card">
+            <div class="ch"><div class="ico"><i data-lucide="pie-chart" class="h-4 w-4"></i></div><div class="min-w-0"><div class="ttl">Leads by source</div><div id="dv" class="val"></div></div></div>
+            <div class="cb flex flex-wrap items-center justify-center gap-4"><svg id="donut" viewBox="0 0 128 128" class="h-32 w-32 shrink-0" role="img" aria-label="Leads by source"></svg><div id="dl" class="grid min-w-[150px] flex-1 gap-2.5"></div></div>
+          </div>
+        </section>
+
+        <section class="rw r21">
+          <div class="card">
+            <div class="ch"><div class="ico"><i data-lucide="building-2" class="h-4 w-4"></i></div><div class="min-w-0"><div class="ttl">Client performance</div><div class="val">Click a column to sort</div></div></div>
+            <div class="cb overflow-x-auto"><table class="w-full min-w-[680px] text-[13px]"><thead id="th"></thead><tbody id="tb"></tbody></table></div>
+          </div>
+          <div class="card">
+            <div class="ch"><div class="ico"><i data-lucide="lightbulb" class="h-4 w-4"></i></div><div class="min-w-0"><div class="ttl">Insights</div><div class="val">What stands out</div></div></div>
+            <div id="ins" class="cb"></div>
+          </div>
+        </section>
+
+        <div class="no-print card">
+          <div id="tabs" class="flex gap-1 overflow-x-auto border-b border-line px-3 pt-2" role="tablist"></div>
+          <div id="rep" class="min-w-0"></div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/component/modals.js"></script>
+  <script src="/component/sidebar.js"></script>
+  <script src="/component/topbar.js"></script>
+  <script src="/js/reports.js"></script>
+</body>
+</html>

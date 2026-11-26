@@ -35,9 +35,11 @@
         <div class="flex flex-wrap items-end justify-between gap-2">
           <div class="min-w-0">
             <h1 class="truncate text-xl font-bold">Clients</h1>
-            <p class="text-xs text-mute sm:text-sm">Create workspaces, assign teams and invite clients.</p>
+            <p class="text-xs text-mute sm:text-sm">One place for each client: campaigns, leads, creatives, products and accounts.</p>
           </div>
           <div class="flex flex-wrap gap-2">
+            <button class="btn-o" data-form="googleAd"><i data-lucide="search" class="h-3.5 w-3.5"></i>Run Google ad</button>
+            <button class="btn-o" data-form="waCampaign"><i data-lucide="message-circle" class="h-3.5 w-3.5"></i>Run WhatsApp campaign</button>
             <button class="btn-o" data-form="invite"><i data-lucide="mail" class="h-3.5 w-3.5"></i>Invite client</button>
             <button class="btn-p" data-form="client"><i data-lucide="plus" class="h-3.5 w-3.5"></i>New client</button>
           </div>
@@ -56,6 +58,7 @@
             <select id="fp" class="sel" aria-label="Package"><option value="">All packages</option><option>Starter</option><option>Growth</option><option>Premium</option></select>
             <select id="fm" class="sel" aria-label="Manager"></select>
             <select id="so" class="sel" aria-label="Sort"><option value="name">Sort: Name</option><option value="spend">Sort: Ad spend</option><option value="leads">Sort: Leads</option><option value="new">Sort: Newest</option></select>
+            <button id="xp" class="btn-o" aria-pressed="false"><i data-lucide="tags" class="h-3.5 w-3.5"></i><span>Show products</span></button>
             <div id="vt" class="flex shrink-0 rounded-lg bg-bg p-0.5">
               <button data-v="table" aria-label="Table view" class="grid h-7 w-7 place-items-center rounded-md"><i data-lucide="list" class="h-4 w-4"></i></button>
               <button data-v="cards" aria-label="Card view" class="grid h-7 w-7 place-items-center rounded-md"><i data-lucide="layout-grid" class="h-4 w-4"></i></button>
@@ -70,6 +73,7 @@
   </div>
 
   <script src="/component/modals.js"></script>
+  <script src="/js/data.js"></script>
   <script src="/component/sidebar.js"></script>
   <script src="/component/topbar.js"></script>
   <script src="/js/clients.js"></script>

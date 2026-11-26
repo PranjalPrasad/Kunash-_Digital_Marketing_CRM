@@ -161,7 +161,8 @@
 
   /* Overlay forms: create, edit, pause */
   document.addEventListener('form:saved', ({ detail: { key, data, vals } }) => {
-    if (key === 'campaign') {
+    if (key === 'campaign' || key === 'googleAd' || key === 'waCampaign') {
+      if (key !== 'campaign') Object.assign(data, { platform: key === 'googleAd' ? 'Google Ads' : 'WhatsApp', objective: data.objective || 'Leads', brief: data.brief || data.message || '' });
       const id = Math.max(0, ...C.map((c) => c.id)) + 1;
       C.unshift(mk(id, data.name, data.client, data.platform, data.objective, +data.budget || 0, 0, 0, data.start || '', data.end || '', 'Draft', [], data.brief || '', [['John Doe', 'Created as draft', 'Just now']]));
       Object.assign(st, { tab: 'All', so: 'new', page: 1 }); $('#so').value = 'new';
